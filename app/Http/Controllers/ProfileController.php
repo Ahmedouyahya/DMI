@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -18,7 +19,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // Validation des données entrantes
+        // Validate incoming data
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
@@ -27,16 +28,19 @@ class ProfileController extends Controller
             'about_me' => 'nullable|string|max:1000',
         ]);
 
-        // Mise à jour du profil utilisateur
-        $user->update([
+        // Prepare user data
+        $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'location' => $request->location,
             'about_me' => $request->about_me,
-        ]);
+        ];
 
-        // Redirection avec un message de succès
-        return redirect()->route('profile')->with('success', 'Profil mis à jour avec succès.');
+        // Update user profile
+        //$user->update($userData);
+
+        // Redirect with a success message
+        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 }

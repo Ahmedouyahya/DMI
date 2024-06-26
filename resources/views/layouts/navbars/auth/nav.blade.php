@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
             <div class="nav-item d-flex align-self-end">
                 <a href="https://rim-un.free.nf/pages/list_note.php" target="_blank" class="btn btn-primary active mb-0 text-white" role="button" aria-pressed="true">
-                    liste nites
+                    liste notes
                 </a>
             </div>
             <div class="ms-md-3 pe-md-3 d-flex align-items-center">

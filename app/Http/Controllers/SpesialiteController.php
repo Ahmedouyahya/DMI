@@ -29,34 +29,4 @@ class SpesialiteController extends Controller
 
         return redirect()->route('spesialite.index')->with('success', 'Specialty created successfully.');
     }
-
-    public function show(Spesialite $spesialite)
-    {
-        return view('spesialite.show', compact('spesialite'));
-    }
-
-    public function edit(Spesialite $spesialite)
-    {
-        return view('spesialite.edit', compact('spesialite'));
-    }
-
-    public function update(Request $request, Spesialite $spesialite)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
-
-        $spesialite->update($request->all());
-
-        return redirect()->route('spesialite.index')->with('success', 'Specialty updated successfully.');
-    }
-
-    public function destroy(Spesialite $spesialite)
-    {
-        $spesialite->delete();
-
-        return redirect()->route('spesialite.index')->with('success', 'Specialty deleted successfully.');
-    }
 }
-

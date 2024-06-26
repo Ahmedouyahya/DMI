@@ -9,10 +9,10 @@ class Spesialite extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    // Specify the table name
+    protected $table = 'spesialite';
+
+    // Specify the fillable attributes if necessary
     protected $fillable = ['name', 'description'];
 }
+

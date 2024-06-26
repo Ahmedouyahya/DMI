@@ -33,10 +33,12 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 // Authenticated user routes
-Route::group(['middleware' => 'auth'], function () {
-    // User profile routes
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::post('/profile', [ProfileController::class, 'update']);
+Route::middleware('auth')->group(function () {
+    Route::get('/user-profile', [InfoUserController::class, 'create'])->name('user.profile');
+    Route::post('/user-profile', [InfoUserController::class, 'store'])->name('user.profile.update');
+
+    // Profile update route
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Dashboard route
     Route::get('dashboard', function () {
@@ -45,10 +47,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Routes accessible only to admin
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     // User management routes
     Route::resource('users', UserController::class);
-
 
     // Billing management route
     Route::get('billing', function () {
@@ -70,7 +71,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 // Guest routes (accessible only when not authenticated)
-Route::group(['middleware' => 'guest'], function () {
+Route::middleware('guest')->group(function () {
     // Registration routes
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
@@ -95,7 +96,3 @@ Route::get('/login', function () {
 
 // Logout route
 Route::get('/logout', [SessionsController::class, 'destroy']);
-
-// User profile routes (public)
-Route::get('/user-profile', [InfoUserController::class, 'create']);
-Route::post('/user-profile', [InfoUserController::class, 'store']);

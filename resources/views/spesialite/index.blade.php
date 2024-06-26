@@ -1,10 +1,17 @@
 <!-- resources/views/spesialite/index.blade.php -->
 
-@extends('layouts.app')
 
-@section('title', 'Specialties')
+
+
+
+
+
+
+@extends('layouts.user_type.auth')
+
 
 @section('content')
+
 <div class="container">
     <h1>Specialties</h1>
     <a href="{{ route('spesialite.create') }}" class="btn btn-primary mb-3">Add New Specialty</a>
