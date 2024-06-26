@@ -12,7 +12,7 @@ class PDFController extends Controller
     {
         $students = Student::all();
         $data = [
-            'title' => 'Master1 SSD',
+            'title' => 'Master1',
             'year' => '2023-2024',
             'students' => $students,
         ];
@@ -22,6 +22,6 @@ class PDFController extends Controller
         // Set custom paper size (e.g., 14 inches wide and 8.5 inches tall)
         $pdf->setPaper([0, 0, 1008, 612]); // Width: 1008pt (14 inches), Height: 612pt (8.5 inches)
 
-        return $pdf->download('Master1_SSD.pdf');
+        return $pdf->download('Master1.pdf');
     }
 }

@@ -12,6 +12,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AlgorithmController;
+use App\Models\Student;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,8 +61,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Tables route
     Route::get('tables', function () {
-        return view('tables');
+        $students = Student::all();
+        return view('tables', compact('students'));
     })->name('tables');
+
+
+    //tablbe student crud
+    Route::resource('students', StudentController::class);
+    Route::get('run-algorithm', [AlgorithmController::class, 'runAlgorithm'])->name('run-algorithm');
+
+
 
     // Virtual reality route
     Route::get('virtual-reality', function () {
